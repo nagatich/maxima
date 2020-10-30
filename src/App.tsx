@@ -7,12 +7,14 @@ import MainNavigator from 'components/navigators/MainNavigator'
 import AuthNavigator from 'components/navigators/AuthNavigator'
 
 const App: React.FC = () => {
-  const [isLoggedIn] = React.useState<boolean>(true)
+  const [isLoggedIn] = React.useState<boolean>(false)
 
   return (
     <ThemeProvider theme={themes.defaultTheme}>
       <NavigationContainer>
-          {isLoggedIn ? <MainNavigator /> : <AuthNavigator />}
+          <MainNavigator
+            isLoggedIn={isLoggedIn}
+          />
       </NavigationContainer>
     </ThemeProvider>
   )

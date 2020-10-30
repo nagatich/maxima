@@ -3,21 +3,33 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import UsersScreen from 'components/screens/UsersScreen'
 import PhotosScreen from 'components/screens/PhotosScreen'
+import LoginScreen from 'components/screens/LoginScreen'
 
 const BottomNavigator = createBottomTabNavigator()
 
-const MainNavigator: React.FC = () => {
-  console.log(1)
+interface Props {
+  isLoggedIn: boolean
+}
+
+const MainNavigator: React.FC<Props> = ({ isLoggedIn }) => {
   return (
     <BottomNavigator.Navigator>
       <BottomNavigator.Screen
-        name="users"
+        name="Users"
         component={UsersScreen}
       />
-      <BottomNavigator.Screen
-        name="photos"
-        component={PhotosScreen}
-      />
+      {isLoggedIn && (
+        <BottomNavigator.Screen
+          name="Photos"
+          component={PhotosScreen}
+        />
+      )}
+      {!isLoggedIn && (
+        <BottomNavigator.Screen
+          name="Login"
+          component={LoginScreen}
+        />
+      )}
     </BottomNavigator.Navigator>
   )
 }

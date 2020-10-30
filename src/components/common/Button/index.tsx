@@ -8,10 +8,12 @@ const Button: React.FC<Props> = ({
   title,
   onPress,
   styles,
+  type,
 }) => (
   <Styled
     onPress={onPress}
     styles={styles}
+    type={type}
   >
     <Text>{ title }</Text>
   </Styled>

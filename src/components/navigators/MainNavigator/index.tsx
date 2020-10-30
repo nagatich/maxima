@@ -7,29 +7,21 @@ import LoginScreen from 'components/screens/LoginScreen'
 
 const BottomNavigator = createBottomTabNavigator()
 
-interface Props {
-  isLoggedIn: boolean
-}
-
-const MainNavigator: React.FC<Props> = ({ isLoggedIn }) => {
+const MainNavigator: React.FC = () => {
   return (
     <BottomNavigator.Navigator>
       <BottomNavigator.Screen
         name="Users"
         component={UsersScreen}
       />
-      {isLoggedIn && (
-        <BottomNavigator.Screen
-          name="Photos"
-          component={PhotosScreen}
-        />
-      )}
-      {!isLoggedIn && (
-        <BottomNavigator.Screen
-          name="Login"
-          component={LoginScreen}
-        />
-      )}
+      <BottomNavigator.Screen
+        name="Photos"
+        component={PhotosScreen}
+      />
+      <BottomNavigator.Screen
+        name="Login"
+        component={LoginScreen}
+      />
     </BottomNavigator.Navigator>
   )
 }

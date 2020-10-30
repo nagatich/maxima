@@ -12,7 +12,6 @@ export default styled.TouchableOpacity<Props>`
   padding: ${(props) => props.theme.margins.small};
   border-radius: 5px;
   background-color: ${(props) => {
-    console.log(props.type)
     switch(props.type) {
       case Type.base: {
         return (props) => props.theme.bgColor.base

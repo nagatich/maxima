@@ -4,20 +4,16 @@ import { ThemeProvider } from 'styled-components'
 
 import themes from 'theme'
 import MainNavigator from 'components/navigators/MainNavigator'
-import AuthNavigator from 'components/navigators/AuthNavigator'
+import AuthContext from 'components/context/AuthContext'
 
-const App: React.FC = () => {
-  const [isLoggedIn] = React.useState<boolean>(false)
-
-  return (
-    <ThemeProvider theme={themes.defaultTheme}>
-      <NavigationContainer>
-          <MainNavigator
-            isLoggedIn={isLoggedIn}
-          />
-      </NavigationContainer>
-    </ThemeProvider>
-  )
-}
+const App: React.FC = () => (
+  <ThemeProvider theme={themes.defaultTheme}>
+    <NavigationContainer>
+      <AuthContext>
+        <MainNavigator />
+      </AuthContext>
+    </NavigationContainer>
+  </ThemeProvider>
+)
 
 export default App

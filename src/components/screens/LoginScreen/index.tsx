@@ -4,25 +4,33 @@ import { Text } from 'react-native'
 import Styled, {
   Form,
 } from './styles'
-import { Type } from 'components/common/Button/types'
 
+import { Type } from 'components/common/Button/types'
 import Input from 'components/common/Input'
 import Button from 'components/common/Button'
+import { useAuth } from 'components/context/AuthContext'
 
 const LoginScreen: React.FC = () => {
   const [login, setLogin] = React.useState<string>("")
   const [password, setPassword] = React.useState<string>("")
+  const auth = useAuth()
 
-  const onLoginChangeText = (text: string) => {
+  const onLoginChangeText = (text: string): void => {
     setLogin(text)
   }
 
-  const onPasswordChangeText = (text: string) => {
+  const onPasswordChangeText = (text: string): void => {
     setPassword(text)
   }
 
-  const authenticate = () => {
-
+  const authenticate = (): void => {
+    auth.signIn(login, password)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   return (

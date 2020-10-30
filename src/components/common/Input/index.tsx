@@ -17,19 +17,19 @@ const Input: React.FC<Props> = ({
   styles,
 }) => {
   const [isInputFocused, setIsInputFocused] = React.useState<boolean>(isFocused)
-  const [inputValue, setInputValue] = React.useState(value || "")
+  const [inputValue, setInputValue] = React.useState<string>(value || "")
 
-  const onInputFocus = () => {
+  const onInputFocus = (): void => {
     setIsInputFocused(true)
     onFocus && onFocus()
   }
 
-  const onInputBlur = () => {
+  const onInputBlur = (): void => {
     setIsInputFocused(false)
     onBlur && onBlur()
   }
 
-  const onInputChangeText = (text: string) => {
+  const onInputChangeText = (text: string): void => {
     setInputValue(text)
     onChangeText && onChangeText(text)
   }

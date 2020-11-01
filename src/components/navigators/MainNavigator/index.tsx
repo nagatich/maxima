@@ -11,9 +11,7 @@ const MainNavigator: React.FC = () => {
   const auth = useAuth()
 
   return (
-    <Tabs.Navigator
-      initialRouteName="UsersScreen"
-    >
+    <Tabs.Navigator>
       <Tabs.Screen
         name="UsersScreen"
         component={UsersScreen}

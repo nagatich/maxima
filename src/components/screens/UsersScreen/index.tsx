@@ -1,8 +1,9 @@
-import React from 'react'
+import * as React from 'react'
 
 import Styled from './styles'
 import { User } from './types'
 
+import Loader from 'components/common/Loader'
 import UserCard from './UserCard'
 
 const getUsers = async () => {
@@ -21,13 +22,15 @@ const UsersScreen: React.FC = () => {
       })
   }, [])
 
-  if (!users.length) return null
+  if (!users.length) return <Loader />
 
   return (
-    <Styled>
-      {users.map((user) => <UserCard user={user} key={user.id} />)}
-    </Styled>
+    <Styled
+      data={users}
+      renderItem={({ item }) => <UserCard user={item} />}
+      keyExtractor={(item) => item.id.toString()}
+    />
   )
 }
 
-export default UsersScreen
+export default React.memo(UsersScreen)

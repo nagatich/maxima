@@ -26,7 +26,7 @@ export default styled.TouchableOpacity<Props>`
         return (props) => props.theme.bgColor.safe
       }
       case Type.secondary: {
-        return (props) => props.theme.bgColor.extra
+        return (props) => props.theme.bgColor.secondary
       }
       default: {
         return 'transparent'

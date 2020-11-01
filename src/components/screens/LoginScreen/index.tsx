@@ -1,5 +1,11 @@
 import * as React from 'react'
-import { Text } from 'react-native'
+import {
+  TouchableWithoutFeedback,
+  Keyboard,
+  Text,
+  Alert
+} from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
 
 import Styled, {
   Form,
@@ -9,11 +15,19 @@ import { Type } from 'components/common/Button/types'
 import Input from 'components/common/Input'
 import Button from 'components/common/Button'
 import { useAuth } from 'components/context/AuthContext'
+import { MainNavigationProps } from 'components/navigators/MainNavigator/types'
 
-const LoginScreen: React.FC = ({ navigation }) => {
-  const [login, setLogin] = React.useState<string>("")
-  const [password, setPassword] = React.useState<string>("")
+const LoginScreen: React.FC<MainNavigationProps> = ({ navigation }) => {
+  const [login, setLogin] = React.useState<string>('')
+  const [password, setPassword] = React.useState<string>('')
   const auth = useAuth()
+  const isFocused = useIsFocused()
+
+  React.useEffect(() => {
+    if (isFocused && auth.user) {
+      auth.signOut()
+    }
+  }, [isFocused])
 
   const onLoginChangeText = (text: string): void => {
     setLogin(text)
@@ -25,47 +39,51 @@ const LoginScreen: React.FC = ({ navigation }) => {
 
   const authenticate = (): void => {
     auth.signIn(login, password)
-      .then((res) => {
-        console.log(res)
-        navigation.navigate('UsersScreen')
+      .then(() => {
+        if (navigation) navigation.navigate('PhotosScreen')
       })
-      .catch((err) => {
-        console.log(err)
+      .catch(() => {
+        Alert.alert(
+          'Ошибка',
+          'Неверный логин или пароль'
+        )
       })
   }
 
   return (
-    <Styled>
-      <Form>
-        <Text>Вход</Text>
-        <Input
-          label="Логин"
-          value={login}
-          onChangeText={onLoginChangeText}
-          styles={{
-            marginBottom: 20,
-          }}
-        />
-        <Input
-          label="Пароль"
-          value={password}
-          onChangeText={onPasswordChangeText}
-          isPassword
-          styles={{
-            marginBottom: 20,
-          }}
-        />
-        <Button
-          title="Войти"
-          onPress={authenticate}
-          styles={{
-            alignItems: 'center',
-            border: 'none',
-          }}
-          type={Type.success}
-        />
-      </Form>
-    </Styled>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <Styled>
+        <Form>
+          <Text>Вход</Text>
+          <Input
+            label="Логин"
+            value={login}
+            onChangeText={onLoginChangeText}
+            styles={{
+              marginBottom: 20,
+            }}
+          />
+          <Input
+            label="Пароль"
+            value={password}
+            onChangeText={onPasswordChangeText}
+            isPassword
+            styles={{
+              marginBottom: 20,
+            }}
+          />
+          <Button
+            title="Войти"
+            onPress={authenticate}
+            styles={{
+              alignItems: 'center',
+              border: 'none',
+            }}
+            type={Type.success}
+          />
+        </Form>
+      </Styled>
+    </TouchableWithoutFeedback>
   )
 }
 

@@ -1,11 +1,16 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { ActivityIndicator } from 'react-native'
+
+import Styled from './styles'
 
 const Loader: React.FC = () => {
   return (
-    <View>
-      <Text></Text>
-    </View>
+    <Styled>
+      <ActivityIndicator
+        color="#0000ff"
+        size="large"
+      />
+    </Styled>
   )
 }
 

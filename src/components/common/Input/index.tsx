@@ -15,6 +15,7 @@ const Input: React.FC<Props> = ({
   value,
   isPassword,
   styles,
+  keyboardType,
 }) => {
   const [isInputFocused, setIsInputFocused] = React.useState<boolean>(isFocused)
   const [inputValue, setInputValue] = React.useState<string>(value || "")
@@ -47,6 +48,7 @@ const Input: React.FC<Props> = ({
         onChangeText={onInputChangeText}
         secureTextEntry={isPassword}
         autoCapitalize='none'
+        keyboardType={keyboardType}
       />
     </Styled>
   )

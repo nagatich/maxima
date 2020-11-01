@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Button } from 'react-native'
 
 import { useAuth } from 'components/context/AuthContext'
 
@@ -9,6 +9,10 @@ const PhotosScreen: React.FC = () => {
   return (
     <View>
       <Text>{ JSON.stringify(auth.user) }</Text>
+      <Button
+        title="выйти"
+        onPress={() => auth.signOut()}
+      />
     </View>
   )
 }

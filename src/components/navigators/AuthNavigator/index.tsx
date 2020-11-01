@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import LoginScreen from 'components/screens/LoginScreen'
@@ -9,8 +9,11 @@ const AuthNavigator: React.FC = () => {
   return (
     <StackNavigator.Navigator>
       <StackNavigator.Screen
-        name="Login"
+        name="LoginScreen"
         component={LoginScreen}
+        options={{
+          title: 'Войти',
+        }}
       />
     </StackNavigator.Navigator>
   )

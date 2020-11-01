@@ -46,6 +46,7 @@ const Input: React.FC<Props> = ({
         onBlur={onInputBlur}
         onChangeText={onInputChangeText}
         secureTextEntry={isPassword}
+        autoCapitalize='none'
       />
     </Styled>
   )

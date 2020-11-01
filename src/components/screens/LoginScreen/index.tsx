@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { Text } from 'react-native'
 
 import Styled, {
@@ -10,7 +10,7 @@ import Input from 'components/common/Input'
 import Button from 'components/common/Button'
 import { useAuth } from 'components/context/AuthContext'
 
-const LoginScreen: React.FC = () => {
+const LoginScreen: React.FC = ({ navigation }) => {
   const [login, setLogin] = React.useState<string>("")
   const [password, setPassword] = React.useState<string>("")
   const auth = useAuth()
@@ -27,6 +27,7 @@ const LoginScreen: React.FC = () => {
     auth.signIn(login, password)
       .then((res) => {
         console.log(res)
+        navigation.navigate('UsersScreen')
       })
       .catch((err) => {
         console.log(err)

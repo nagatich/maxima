@@ -1,28 +1,36 @@
-import React from 'react'
+import * as React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import UsersScreen from 'components/screens/UsersScreen'
 import PhotosScreen from 'components/screens/PhotosScreen'
-import LoginScreen from 'components/screens/LoginScreen'
+import { useAuth } from 'components/context/AuthContext'
 
-const BottomNavigator = createBottomTabNavigator()
+const Tabs = createBottomTabNavigator()
 
 const MainNavigator: React.FC = () => {
+  const auth = useAuth()
+
   return (
-    <BottomNavigator.Navigator>
-      <BottomNavigator.Screen
-        name="Users"
+    <Tabs.Navigator
+      initialRouteName="UsersScreen"
+    >
+      <Tabs.Screen
+        name="UsersScreen"
         component={UsersScreen}
+        options={{
+          title: 'Пользователи',
+        }}
       />
-      <BottomNavigator.Screen
-        name="Photos"
-        component={PhotosScreen}
-      />
-      <BottomNavigator.Screen
-        name="Login"
-        component={LoginScreen}
-      />
-    </BottomNavigator.Navigator>
+      {auth.user && (
+        <Tabs.Screen
+          name="PhotosScreen"
+          component={PhotosScreen}
+          options={{
+            title: 'Фотографии',
+          }}
+        />
+      )}
+    </Tabs.Navigator>
   )
 }
 

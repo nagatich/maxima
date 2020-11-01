@@ -6,7 +6,7 @@ import { User } from './types'
 import Loader from 'components/common/Loader'
 import UserCard from './UserCard'
 
-const getUsers = async () => {
+const getUsers = async (): Promise<User[]> => {
   const req = await fetch('https://jsonplaceholder.typicode.com/users')
   const json = await req.json()
   return json
@@ -17,7 +17,7 @@ const UsersScreen: React.FC = () => {
 
   React.useEffect(() => {
     getUsers()
-      .then((res) => {
+      .then((res: User[]) => {
         setUsers(res)
       })
   }, [])

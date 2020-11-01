@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { TouchableWithoutFeedback, Keyboard } from 'react-native'
 
 import Styled, {
@@ -10,7 +10,7 @@ import Input from 'components/common/Input'
 import Loader from 'components/common/Loader'
 import PhotoCard from './PhotoCard'
 
-const getPhotos = async () => {
+const getPhotos = async (): Promise<Photo[]> => {
   const req = await fetch('https://jsonplaceholder.typicode.com/photos')
   const json = await req.json()
   return json

@@ -31,6 +31,9 @@ const PhotosScreen: React.FC = () => {
     setInputValue(text)
   }
 
+  const data = inputValue ? photos.filter((photo) => photo.albumId.toString() === inputValue) : photos
+  const renderItem = ({ item }: any) => <PhotoCard photo={item} />
+
   if (!photos.length) return <Loader />
 
   return (
@@ -46,8 +49,8 @@ const PhotosScreen: React.FC = () => {
           keyboardType="numeric"
         />
         <StyledFlatList
-          data={inputValue ? photos.filter((photo) => photo.albumId.toString() === inputValue) : photos}
-          renderItem={({ item }) => <PhotoCard photo={item} />}
+          data={data}
+          renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
         />
       </Styled>

@@ -4,31 +4,38 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import UsersScreen from 'components/screens/UsersScreen'
 import PhotosScreen from 'components/screens/PhotosScreen'
 import { useAuth } from 'components/context/AuthContext'
+import Header from 'components/common/Header'
+import { RootNavigationProps } from '../RootNavigator/types'
 
 const Tabs = createBottomTabNavigator()
 
-const MainNavigator: React.FC = () => {
+const MainNavigator: React.FC<RootNavigationProps> = ({ navigation }) => {
   const auth = useAuth()
 
   return (
-    <Tabs.Navigator>
-      <Tabs.Screen
-        name="UsersScreen"
-        component={UsersScreen}
-        options={{
-          title: 'Пользователи',
-        }}
+    <>
+      <Header
+        navigation={navigation}
       />
-      {auth.user && (
+      <Tabs.Navigator>
         <Tabs.Screen
-          name="PhotosScreen"
-          component={PhotosScreen}
+          name="UsersScreen"
+          component={UsersScreen}
           options={{
-            title: 'Фотографии',
+            title: 'Пользователи',
           }}
         />
-      )}
-    </Tabs.Navigator>
+        {auth.user && (
+          <Tabs.Screen
+            name="PhotosScreen"
+            component={PhotosScreen}
+            options={{
+              title: 'Фотографии',
+            }}
+          />
+        )}
+      </Tabs.Navigator>
+    </>
   )
 }
 

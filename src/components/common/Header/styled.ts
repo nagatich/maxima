@@ -6,7 +6,7 @@ export default styled.View`
 `
 
 export const IconView = styled.View`
-  align-self: flex-end;
+  align-self: flex-start;
 `
 
 export const Image = styled.Image`
